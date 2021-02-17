@@ -2281,6 +2281,14 @@ String RasterizerStorageGLES3::shader_get_code(RID p_shader) const {
 	return shader->code;
 }
 
+bool RasterizerStorageGLES3::is_reporting_shader_compilation() const {
+	return _reporting_shader_compilation;
+}
+
+void RasterizerStorageGLES3::set_reporting_shader_compilation(bool p_enable) {
+	_reporting_shader_compilation = p_enable;
+}
+
 void RasterizerStorageGLES3::_update_shader(Shader *p_shader) const {
 
 	_shader_dirty_list.remove(&p_shader->dirty_list);
@@ -2397,7 +2405,7 @@ void RasterizerStorageGLES3::_update_shader(Shader *p_shader) const {
 		return;
 	}
 
-	p_shader->shader->set_custom_shader_code(p_shader->custom_code_id, gen_code.vertex, gen_code.vertex_global, gen_code.fragment, gen_code.light, gen_code.fragment_global, gen_code.uniforms, gen_code.texture_uniforms, gen_code.defines);
+	p_shader->shader->set_custom_shader_code(p_shader->custom_code_id, gen_code.vertex, gen_code.vertex_global, gen_code.fragment, gen_code.light, gen_code.fragment_global, gen_code.uniforms, gen_code.texture_uniforms, gen_code.defines, p_shader->code);
 
 	p_shader->ubo_size = gen_code.uniform_total_size;
 	p_shader->ubo_offsets = gen_code.uniform_offsets;
@@ -8482,4 +8490,5 @@ void RasterizerStorageGLES3::update_dirty_resources() {
 }
 
 RasterizerStorageGLES3::RasterizerStorageGLES3() {
+	_reporting_shader_compilation = false;
 }

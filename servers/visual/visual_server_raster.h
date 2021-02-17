@@ -95,6 +95,8 @@ public:
 
 #define BIND0R(m_r, m_name) \
 	m_r m_name() { return BINDBASE->m_name(); }
+#define BIND0RC(m_r, m_name) \
+	m_r m_name() const { return BINDBASE->m_name(); }
 #define BIND1R(m_r, m_name, m_type1) \
 	m_r m_name(m_type1 arg1) { return BINDBASE->m_name(arg1); }
 #define BIND1RC(m_r, m_name, m_type1) \
@@ -193,6 +195,9 @@ public:
 	BIND2(shader_add_custom_define, RID, const String &)
 	BIND2C(shader_get_custom_defines, RID, Vector<String> *)
 	BIND2(shader_remove_custom_define, RID, const String &)
+
+	BIND0RC(bool, is_reporting_shader_compilation)
+	BIND1(set_reporting_shader_compilation, bool)
 
 	/* COMMON MATERIAL API */
 

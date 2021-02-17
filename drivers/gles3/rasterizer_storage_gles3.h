@@ -541,6 +541,11 @@ public:
 	virtual void shader_get_custom_defines(RID p_shader, Vector<String> *p_defines) const;
 	virtual void shader_remove_custom_define(RID p_shader, const String &p_define);
 
+	bool _reporting_shader_compilation;
+
+	virtual bool is_reporting_shader_compilation() const;
+	virtual void set_reporting_shader_compilation(bool p_enable);
+
 	void _update_shader(Shader *p_shader) const;
 
 	void update_dirty_shaders();

@@ -266,6 +266,9 @@ public:
 	void shader_get_custom_defines(RID p_shader, Vector<String> *p_defines) const {}
 	void shader_remove_custom_define(RID p_shader, const String &p_define) {}
 
+	bool is_reporting_shader_compilation() const { return false; }
+	void set_reporting_shader_compilation(bool p_enable) {}
+
 	/* COMMON MATERIAL API */
 
 	RID material_create() { return RID(); }

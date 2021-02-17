@@ -1407,6 +1407,14 @@ String RasterizerStorageGLES2::shader_get_code(RID p_shader) const {
 	return shader->code;
 }
 
+bool RasterizerStorageGLES2::is_reporting_shader_compilation() const {
+	return false;
+}
+
+void RasterizerStorageGLES2::set_reporting_shader_compilation(bool p_enable) {
+	ERR_FAIL_COND(p_enable); // Unimplemented
+}
+
 void RasterizerStorageGLES2::_update_shader(Shader *p_shader) const {
 
 	_shader_dirty_list.remove(&p_shader->dirty_list);

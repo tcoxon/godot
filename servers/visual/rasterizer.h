@@ -246,6 +246,9 @@ public:
 	virtual void shader_get_custom_defines(RID p_shader, Vector<String> *p_defines) const = 0;
 	virtual void shader_remove_custom_define(RID p_shader, const String &p_define) = 0;
 
+	virtual bool is_reporting_shader_compilation() const = 0;
+	virtual void set_reporting_shader_compilation(bool p_enable) = 0;
+
 	/* COMMON MATERIAL API */
 
 	virtual RID material_create() = 0;

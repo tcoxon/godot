@@ -130,6 +130,9 @@ public:
 	FUNC2SC(shader_get_custom_defines, RID, Vector<String> *)
 	FUNC2(shader_remove_custom_define, RID, const String &)
 
+	FUNC0RC(bool, is_reporting_shader_compilation)
+	FUNC1(set_reporting_shader_compilation, bool)
+
 	/* COMMON MATERIAL API */
 
 	FUNCRID(material)

@@ -1680,6 +1680,9 @@ void VisualServer::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("shader_set_default_texture_param", "shader", "name", "texture"), &VisualServer::shader_set_default_texture_param);
 	ClassDB::bind_method(D_METHOD("shader_get_default_texture_param", "shader", "name"), &VisualServer::shader_get_default_texture_param);
 
+	ClassDB::bind_method(D_METHOD("is_reporting_shader_compilation"), &VisualServer::is_reporting_shader_compilation);
+	ClassDB::bind_method(D_METHOD("set_reporting_shader_compilation", "enable"), &VisualServer::set_reporting_shader_compilation);
+
 	ClassDB::bind_method(D_METHOD("material_create"), &VisualServer::material_create);
 	ClassDB::bind_method(D_METHOD("material_set_shader", "shader_material", "shader"), &VisualServer::material_set_shader);
 	ClassDB::bind_method(D_METHOD("material_get_shader", "shader_material"), &VisualServer::material_get_shader);

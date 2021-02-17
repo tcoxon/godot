@@ -32,6 +32,10 @@
 
 #include "core/print_string.h"
 
+#ifdef DEBUG_ENABLED
+#include "servers/visual_server.h"
+#endif
+
 //#define DEBUG_OPENGL
 
 #ifdef DEBUG_OPENGL
@@ -245,6 +249,12 @@ ShaderGLES3::Version *ShaderGLES3::get_current_version() {
 		cc = &custom_code_map[conditional_version.code_version];
 		v.code_version = cc->version;
 	}
+
+#ifdef DEBUG_ENABLED
+	if (cc && VisualServer::get_singleton()->is_reporting_shader_compilation()) {
+		print_error(String("Unexpected shader compilation: {0}").format(varray(cc->source)));
+	}
+#endif
 
 	/* CREATE PROGRAM */
 
@@ -716,7 +726,7 @@ uint32_t ShaderGLES3::create_custom_shader() {
 	return last_custom_code++;
 }
 
-void ShaderGLES3::set_custom_shader_code(uint32_t p_code_id, const String &p_vertex, const String &p_vertex_globals, const String &p_fragment, const String &p_light, const String &p_fragment_globals, const String &p_uniforms, const Vector<StringName> &p_texture_uniforms, const Vector<CharString> &p_custom_defines) {
+void ShaderGLES3::set_custom_shader_code(uint32_t p_code_id, const String &p_vertex, const String &p_vertex_globals, const String &p_fragment, const String &p_light, const String &p_fragment_globals, const String &p_uniforms, const Vector<StringName> &p_texture_uniforms, const Vector<CharString> &p_custom_defines, const String &p_source) {
 
 	ERR_FAIL_COND(!custom_code_map.has(p_code_id));
 	CustomCode *cc = &custom_code_map[p_code_id];
@@ -729,6 +739,7 @@ void ShaderGLES3::set_custom_shader_code(uint32_t p_code_id, const String &p_ver
 	cc->texture_uniforms = p_texture_uniforms;
 	cc->uniforms = p_uniforms;
 	cc->custom_defines = p_custom_defines;
+	cc->source = p_source;
 	cc->version++;
 }
 
